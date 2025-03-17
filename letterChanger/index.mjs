@@ -41,12 +41,16 @@ function setLetterChangerString(newString) {
         let letterElement = document.createElement("span");
         letterElement.style.display = "flex";
         letterElement.style.flexDirection = "column";
+        letterElement.style.flexShrink = 0;
+        letterElement.style.flexGrow = 0;
         letterElement.style.alignItems = "center";
         letterElement.style.minWidth = "20px";
 
         // Create part of letterElement that will hold the text
         let letterText = document.createElement("span");
         letterText.innerText = letter;
+        letterText.style.minWidth = "40px";
+        letterText.style.textAlign = "center";
         letterElement.appendChild(letterText);
 
         letterChanger.appendChild(letterElement);
@@ -63,13 +67,16 @@ function setLetterChangerString(newString) {
                 let outputString = "";
                 for (let letterEl of letterChanger.children) {
                     outputString += letterEl.children[0].innerText;
+                    if (!letterEl.children[0].innerText) 
+                        outputString += " ";
                 }
                 setOutputInputString(outputString);
         })
 
         // populate select element with options
         if (casedLetterJson[letter]) {
-            for (let variant of casedLetterJson[letter]) {
+            // This configuration makes the default character the first letter variant option
+            for (let variant of [letter, ...casedLetterJson[letter]]) {
                 // Create a new option
                 let varOption = document.createElement("option");
                 varOption.value = variant;
@@ -81,6 +88,8 @@ function setLetterChangerString(newString) {
     let outputString = "";
     for (let letterEl of letterChanger.children) {
         outputString += letterEl.children[0].innerText;
+        if (!letterEl.children[0].innerText) 
+            outputString += " ";
     }
     setOutputInputString(outputString);
 }
