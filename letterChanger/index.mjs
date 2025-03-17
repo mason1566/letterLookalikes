@@ -12,9 +12,31 @@ content.style.alignItems = "flex-start";
 /* Letter Changer Component */
 letterChanger.style.overflow = "scroll";
 letterChanger.style.width = "100%";
+letterChanger.style.paddingBottom = "10px";
+letterChanger.style.display = "flex";
+letterChanger.style.flexDirection = "row";
 
 function setLetterChangerString(newString) {
-    letterChanger.innerHTML = newString;
+    letterChanger.innerHTML = "";
+    for (let letter of newString) { 
+        // Create the letter element and set its properties
+        let letterElement = document.createElement("span");
+        letterElement.style.display = "flex";
+        letterElement.style.flexDirection = "column";
+        letterElement.style.alignItems = "center";
+
+        // Create part of letterElement that will hold the text
+        let letterText = document.createElement("span");
+        letterText.innerText = letter;
+        letterElement.appendChild(letterText);
+
+        // Create part of letterElement that will hold the letter selector
+        let letterSelect = document.createElement("select");
+        letterElement.appendChild(letterSelect);
+
+
+        letterChanger.appendChild(letterElement);
+    };
     setOutputInputString(newString);
 }
 
