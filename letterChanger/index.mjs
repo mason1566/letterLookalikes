@@ -42,12 +42,15 @@ function setLetterChangerString(newString) {
         letterElement.style.display = "flex";
         letterElement.style.flexDirection = "column";
         letterElement.style.alignItems = "center";
+        letterElement.style.minWidth = "20px";
 
         // Create part of letterElement that will hold the text
         let letterText = document.createElement("span");
         letterText.innerText = letter;
         letterElement.appendChild(letterText);
 
+        letterChanger.appendChild(letterElement);
+        
         if (!casedLetterJson[letter])
             continue;
 
@@ -74,8 +77,6 @@ function setLetterChangerString(newString) {
                 letterSelect.appendChild(varOption);
             }
         }
-                
-        letterChanger.appendChild(letterElement);
     };
     let outputString = "";
     for (let letterEl of letterChanger.children) {
